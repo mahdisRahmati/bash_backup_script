@@ -1,6 +1,7 @@
 #!/bin/bash
 # bash backup script - step 1
 echo "Starting backup script..."
+start_time=$(date +%s)
 read -p "Enter the source path for backup: " source_path
 read -p "Enter the file extension to include (example txt or jpg): " file_ext
 echo "Searching for *.$file_ext files in $source_path ..."
@@ -20,3 +21,19 @@ if [ $? -eq 0 ]; then
 else
   echo "Error occurred while creating backup archive."
 fi
+
+# Logging the backup process - step 3
+log_file="backup.log"
+end_time=$(date +%s)
+duration=$((end_time - start_time))
+archive_size=$(du -h "$backup_path" | cut -f1)
+file_count=$(cat backup.conf | wc -l)
+{
+  echo "Date       : $(date '+%Y-%m-%d %H:%M:%S')"
+  echo "Backup file: $backup_path"
+  echo "File Count : $file_count"
+  echo "Size       : $archive_size"
+  echo "Duration   : ${duration}s"
+  echo "Status     : Success"
+} >> "$log_file"
+echo "Backup log updated: $log_file"
