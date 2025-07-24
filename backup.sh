@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # *extra credit section - step CLI Menu
 echo "============================="
 echo "         Backup Menu         "
@@ -8,7 +7,6 @@ echo "2. View log file"
 echo "3. Exit"
 echo "============================="
 read -p "Choose an option (1 or 2 or 3): " choice
-
 case $choice in
 1)
   echo ">> Starting backup..."
@@ -37,7 +35,7 @@ echo "Searching for *.$file_ext files in $source_path ..."
 find "$source_path" -type f -name "*.$file_ext" > backup.conf
 echo "List of files saved to backup.conf."
 
-# * extra credit section - step: Dry-Run
+# *extra credit section - step: Dry-Run
 read -p "Do you want to run in dry-run mode? (y/n): " dry_run
 if [ "$dry_run" == "y" ]; then
    echo " Dry-run mode enabled. The following files would be backed up:"
@@ -70,7 +68,7 @@ if [ "$encrypt" == "y" ]; then
         echo "gpg is not installed. Skipping encryption."
     fi
 fi
-# Check success
+
 if [ $? -eq 0 ]; then
   echo "Backup archive created successfully"
 else
