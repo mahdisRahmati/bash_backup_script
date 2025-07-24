@@ -8,6 +8,14 @@ echo "Searching for *.$file_ext files in $source_path ..."
 find "$source_path" -type f -name "*.$file_ext" > backup.conf
 echo "List of files saved to backup.conf."
 
+# * extra credit section - step: Dry-Run
+read -p "Do you want to run in dry-run mode? (y/n): " dry_run
+if [ "$dry_run" == "y" ]; then
+   echo " Dry-run mode enabled. The following files would be backed up:"
+   cat backup.conf
+   exit 0
+fi
+
 # step 2
 read -p "Enter destination path to save the backup: " dest_path
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
