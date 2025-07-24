@@ -52,6 +52,9 @@ backup_file="backup-$timestamp.tar.gz"
 full_path="$dest_path/$backup_file"
 echo "Creating backup archive at: $full_path"
 tar -czf "$full_path" -T backup.conf
+
+# *extra credit section - step encrypt
+read -p "Do you want to encrypt the backup? (y/n): " encrypt
 # Check success
 if [ $? -eq 0 ]; then
   echo "Backup archive created successfully"
