@@ -1,4 +1,33 @@
 #!/bin/bash
+
+# *extra credit section - step CLI Menu
+echo "============================="
+echo "         Backup Menu         "
+echo "1. Start backup"
+echo "2. View log file"
+echo "3. Exit"
+echo "============================="
+read -p "Choose an option (1 or 2 or 3): " choice
+
+case $choice in
+1)
+  echo ">> Starting backup..."
+  ;;
+2)
+  echo ">> Showing last 10 log entries:"
+  tail -n 10 backup.log
+  exit 0
+  ;;
+3)
+  echo "Exiting."
+  exit 0
+  ;;
+*)
+  echo "Invalid option. Exiting."
+  exit 1
+  ;;
+esac
+
 # bash backup script - step 1
 echo "Starting backup script..."
 start_time=$(date +%s)
