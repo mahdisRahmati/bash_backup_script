@@ -55,6 +55,21 @@ tar -czf "$full_path" -T backup.conf
 
 # *extra credit section - step encrypt
 read -p "Do you want to encrypt the backup? (y/n): " encrypt
+if [ "$encrypt" == "y" ]; then
+   if command -v gpg &> /dev/null; then
+       echo "Encrypting backup file..."
+       gpg -c "$full_path"
+       if [ $? -eq 0 ]; then
+           echo "Encrypted file created: $full_path.gpg"
+           rm "$full_path"
+           full_path="$full_path.gpg"
+       else 
+           echo "Encryption failed."
+       fi
+    else
+        echo "gpg is not installed. Skipping encryption."
+    fi
+fi
 # Check success
 if [ $? -eq 0 ]; then
   echo "Backup archive created successfully"
