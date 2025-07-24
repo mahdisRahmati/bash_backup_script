@@ -37,3 +37,8 @@ file_count=$(cat backup.conf | wc -l)
   echo "Status     : Success"
 } >> "$log_file"
 echo "Backup log updated: $log_file"
+
+# Remove old backups (older than 7 days) - step 4
+echo "Checking for old backups to delete "
+find "$dest_path" -type f -name "*.tar.gz" -mtime +7 -exec rm {} \;
+echo "Old backups (older than 7 days) deleted if found."
